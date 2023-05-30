@@ -2,6 +2,7 @@ import httpClient from "@/http-client";
 import { BaseService } from "./BaseService";
 import type { ISalon } from "@/domain/ISalon";
 import type { IServiceResult } from "./IServiceResult";
+import type { AxiosError } from "axios";
 
 export class SalonService extends BaseService<ISalon> {
     constructor() {

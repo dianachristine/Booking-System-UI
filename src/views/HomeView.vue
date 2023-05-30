@@ -6,7 +6,7 @@
   <div
       class="text-center bg-image"
       style="
-      background-image: url('src/assets/pink_background.png');
+      background-image: url('/pink_background.png');
       background-size: cover;
       height: 100vh;
       margin-top: 58px;

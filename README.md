@@ -44,3 +44,8 @@ npm run build
 ```sh
 npm run lint
 ```
+
+
+npm run build
+Dockerfile -> build image
+docker run -d -p 8080:80 bookingsystemui:latest

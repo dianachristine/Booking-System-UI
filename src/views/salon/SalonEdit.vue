@@ -60,6 +60,10 @@ export default class SalonEdit extends Vue {
                 fromString = `${fromDate.getFullYear()}-${('0' + (fromDate.getMonth() + 1)).slice(-2)}-${('0' + fromDate.getDate()).slice(-2) + 'T00:00:00.000Z'}`
             }
 
+            if (fromString == null) {
+                fromString = undefined;
+            }
+
             var salonToEdit: ISalon = {
                 id: this.salonStore.$state.salon?.id!,
                 salonName: this.salonName,

@@ -24,7 +24,7 @@ export default class Header extends Vue {
         <!-- Navbar -->
         <nav class="container-fluid navbar navbar-expand-lg navbar-light bg-white fixed-top">
             <div class="container-fluid">
-                <RouterLink to="/" class="navbar-brand" active-class="active" style="background-image: url('/src/assets/logo_small.png');
+                <RouterLink to="/" class="navbar-brand" active-class="active" style="background-image: url('/logo_small.png');
                                         background-size: contain; background-repeat: no-repeat;background-position: center;text-decoration: none;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </RouterLink>
