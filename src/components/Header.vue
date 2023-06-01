@@ -62,12 +62,12 @@ export default class Header extends Vue {
                             <li class="nav-item">
                                 <RouterLink to="/teenused" class="nav-link" active-class="active">Teenused</RouterLink>
                             </li>
-                            <li class="nav-item">
+                         <!--   <li class="nav-item">
                                 <RouterLink to="/meist" class="nav-link" active-class="active">Salongist</RouterLink>
                             </li>
                             <li class="nav-item">
                                 <RouterLink to="/kontakt" class="nav-link" active-class="active">Kontakt</RouterLink>
-                            </li>
+                            </li>-->
                         </template>
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0">
