@@ -46,7 +46,7 @@ npm run lint
 ```
 
 
-npm run build
+npx vite build (npm run build)
 Dockerfile -> build image
 docker run -d -p 8080:80 bookingsystem:uilatest
 TODO router
