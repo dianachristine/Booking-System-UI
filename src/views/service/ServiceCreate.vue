@@ -27,10 +27,10 @@ export default class ServiceCreate extends Vue {
   salonService = new SalonService();
 
   serviceName: string | null = null;
-  description: string = '';
+  description: string | undefined = undefined;
   categoryId: string | null = null;
-  isTargetGroupM: boolean | null = null;
-  isTargetGroupN: boolean | null = null;
+  isTargetGroupM: boolean = false;
+  isTargetGroupN: boolean = false;
   targetGroupFinal: string | null = null;
   serviceDurationInMinutes: number | null = null;
   preparationTimeInMinutes: number | null = null;
@@ -52,7 +52,7 @@ export default class ServiceCreate extends Vue {
 
   async submitClicked(): Promise<void> {
 
-    if (this.serviceName && this.description && this.categoryId && this.serviceDurationInMinutes &&
+    if (this.serviceName && this.categoryId && this.serviceDurationInMinutes &&
       this.preparationTimeInMinutes && this.cleaningTimeInMinutes && this.amount && this.currency &&
       (this.isTargetGroupM || this.isTargetGroupN)) {
 
@@ -141,7 +141,7 @@ export default class ServiceCreate extends Vue {
                         </div>
 
                         <div class="form-group">
-                          <label class="control-label" for="description">Kirjeldus *</label>
+                          <label class="control-label" for="description">Kirjeldus</label>
                           <textarea v-model="description" class="form-control"></textarea>
                         </div>
 

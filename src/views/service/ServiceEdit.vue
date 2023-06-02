@@ -33,8 +33,8 @@ export default class ServiceEdit extends Vue {
   serviceName: string | undefined = undefined;
   description: string | undefined = undefined;
   categoryId: string | undefined = undefined;
-  isTargetGroupM: boolean | undefined = undefined;
-  isTargetGroupN: boolean | undefined = undefined;
+  isTargetGroupM: boolean = false;
+  isTargetGroupN: boolean = false;
   targetGroupFinal: string | undefined = undefined;
   serviceDurationInMinutes: number | undefined = undefined;
   preparationTimeInMinutes: number | undefined = undefined;
@@ -75,7 +75,7 @@ export default class ServiceEdit extends Vue {
 
   async editClicked(): Promise<void> {
 
-    if (this.serviceName && this.description && this.categoryId && this.serviceDurationInMinutes &&
+    if (this.serviceName && this.categoryId && this.serviceDurationInMinutes &&
       this.preparationTimeInMinutes && this.cleaningTimeInMinutes && this.amount && this.currency &&
       (this.isTargetGroupM || this.isTargetGroupN)) {
 
@@ -166,7 +166,7 @@ export default class ServiceEdit extends Vue {
                         </div>
 
                         <div class="form-group">
-                          <label class="control-label" for="description">Kirjeldus *</label>
+                          <label class="control-label" for="description">Kirjeldus</label>
                           <textarea v-model="description" class="form-control"></textarea>
                         </div>
 
@@ -228,8 +228,8 @@ export default class ServiceEdit extends Vue {
                       <br>
                     </div>
                     <div>
-                      <RouterLink :to="{ name: 'servicedetails', params: { id: id } }" class="nav-link" active-class="active"
-                        style="text-decoration: underline;">Tagasi</RouterLink>
+                      <RouterLink :to="{ name: 'servicedetails', params: { id: id } }" class="nav-link"
+                        active-class="active" style="text-decoration: underline;">Tagasi</RouterLink>
                     </div>
                     <br>
                   </div>
@@ -247,7 +247,9 @@ export default class ServiceEdit extends Vue {
       </div>
     </section>
   </template>
-  <template v-else><div style="height: 50px;"></div></template>
+  <template v-else>
+    <div style="height: 50px;"></div>
+  </template>
 </template>
 
 <style scoped>

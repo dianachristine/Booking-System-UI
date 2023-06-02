@@ -1,7 +1,7 @@
 export interface IService {
     id?: string;
     serviceName: string;
-    description: string;
+    description?: string;
     targetGroup: string;
     serviceDurationInMinutes: number;
     preparationTimeInMinutes: number;

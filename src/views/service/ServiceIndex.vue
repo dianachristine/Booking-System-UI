@@ -70,7 +70,7 @@ export default class ServiceIndex extends Vue {
 
                                                         <template v-if="service.isPublic">
                                                             <ServiceInList :service=service servicePath="servicedetails"
-                                                            :idParam=service.id showDescription="true"></ServiceInList>
+                                                            :idParam=service.id showDescription=true></ServiceInList>
                                                         </template>
                                                         <template v-else>
                                                             <RouterLink :to="{ name: 'servicedetails', params: { id: service.id } }" style="text-decoration: none; color:#b9bdc0">
@@ -105,7 +105,7 @@ export default class ServiceIndex extends Vue {
 
                                                         <template v-if="service.isPublic">
                                                             <ServiceInList :service=service servicePath="servicedetails"
-                                                            :idParam=service.id showDescription="true"></ServiceInList>
+                                                            :idParam=service.id showDescription=true></ServiceInList>
                                                         </template>
                                                         <template v-else>
                                                             <RouterLink :to="{ name: 'servicedetails', params: { id: service.id } }" style="text-decoration: none; color:#b9bdc0">
@@ -140,7 +140,7 @@ export default class ServiceIndex extends Vue {
 
                                                         <template v-if="service.isPublic">
                                                             <ServiceInList :service=service servicePath="servicedetails"
-                                                            :idParam=service.id showDescription="true"></ServiceInList>
+                                                            :idParam=service.id showDescription=true></ServiceInList>
                                                         </template>
                                                         <template v-else>
                                                             <RouterLink :to="{ name: 'servicedetails', params: { id: service.id } }" style="text-decoration: none; color:#b9bdc0">
