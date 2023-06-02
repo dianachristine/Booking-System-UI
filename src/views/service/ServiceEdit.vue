@@ -100,7 +100,8 @@ export default class ServiceEdit extends Vue {
         discountName: this.discountName,
         comment: this.comment,
         isPublic: this.isPublic!,
-        salonId: this.salonStore.$state.salon?.id!
+        salonId: this.salonStore.$state.salon?.id!,
+        beauticianId: this.servicesStore.service?.beauticianId
       }
 
       var res = await this.serviceService.edit(serviceToEdit, this.servicesStore.service?.id!);
