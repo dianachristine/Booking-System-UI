@@ -49,16 +49,21 @@ export default class BookingServices extends Vue {
                                     <!--<TargetServicesInCategory :services="servicesStore.services" :serviceCategories="servicesStore.serviceCategories" targetGroup="MN" ></TargetServicesInCategory>-->
 
                                     <div class="row pb-3" v-for="category of servicesStore.serviceCategories"
-                                        :key="category">
+                                        :key="category.categoryName">
                                         <div class="col-md-12">
 
                                             <div class="list-group mb-0">
-                                                <div class="list-group-item" style="background-color: #f8c6d3;">{{ category
-                                                }}</div>
+                                                <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                    <b>{{ category.categoryName }}</b>
+                                                    <small v-if="category.description1"><br>{{ category.description1
+                                                    }}</small>
+                                                    <small v-if="category.description2"><br><b>{{ category.description2
+                                                    }}</b></small>
+                                                </div>
 
                                                 <div class="list-group-item"
                                                     v-for="service of servicesStore.services.filter(service => 
-                                                    service.categoryName === category && service.isPublic)"
+                                                    service.categoryName === category.categoryName && service.isPublic)"
                                                     :key="service.id" v>
                                                     <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id></ServiceInList>
                                                 </div>
@@ -69,15 +74,20 @@ export default class BookingServices extends Vue {
                                 <div class="tab-pane fade" id="target-tabs-n" role="tabpanel"
                                     aria-labelledby="target-tab-n">
                                     <div class="row pb-3" v-for="category of servicesStore.serviceCategoriesTargetN"
-                                        :key="category">
+                                        :key="category.categoryName">
                                         <div class="col-md-12">
 
                                             <div class="list-group mb-0">
-                                                <div class="list-group-item" style="background-color: #f8c6d3;">{{ category
-                                                }}</div>
+                                                <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                    <b>{{ category.categoryName }}</b>
+                                                    <small v-if="category.description1"><br>{{ category.description1
+                                                    }}</small>
+                                                    <small v-if="category.description2"><br><b>{{ category.description2
+                                                    }}</b></small>
+                                                </div>
 
                                                 <div class="list-group-item" v-for="service of servicesStore.services.filter(service =>
-                                                    service.categoryName === category && service.isPublic &&
+                                                    service.categoryName === category.categoryName && service.isPublic &&
                                                     (service.targetGroup == 'N' || service.targetGroup == 'MN'))"
                                                     :key="service.id" v>
                                                     <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id></ServiceInList>
@@ -89,15 +99,18 @@ export default class BookingServices extends Vue {
                                 <div class="tab-pane fade" id="target-tabs-m" role="tabpanel"
                                     aria-labelledby="target-tab-m">
                                     <div class="row pb-3" v-for="category of servicesStore.serviceCategoriesTargetM"
-                                        :key="category">
+                                        :key="category.categoryName">
                                         <div class="col-md-12">
 
                                             <div class="list-group mb-0">
-                                                <div class="list-group-item" style="background-color: #f8c6d3;">{{ category
-                                                }}</div>
+                                                <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                    <b>{{ category.categoryName }}</b>
+                                                    <small v-if="category.description1"><br>{{ category.description1
+                                                    }}</small>
+                                                </div>
 
                                                 <div class="list-group-item" v-for="service of servicesStore.services.filter(service =>
-                                                    service.categoryName === category && service.isPublic &&
+                                                    service.categoryName === category.categoryName && service.isPublic &&
                                                     (service.targetGroup == 'M' || service.targetGroup == 'MN'))"
                                                     :key="service.id" v>
                                                     <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id></ServiceInList>

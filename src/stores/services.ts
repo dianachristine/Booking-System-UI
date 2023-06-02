@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { IService } from '@/domain/IService';
+import type { IServiceCategory } from '@/domain/IServiceCategory';
 
 export const useServicesStore = defineStore({
   id: "services",
@@ -10,13 +11,61 @@ export const useServicesStore = defineStore({
   }),
   getters: {
     serviceCount: (state) => state.services.length,
-    serviceCategories: (state) => Array.from(new Set(state.services.map(service => service.categoryName))),
-    serviceCategoriesTargetM: (state) => Array.from(new Set(state.services
-      .filter(service => service.targetGroup == 'M' || service.targetGroup == 'MN')
-      .map(service => service.categoryName))),
-    serviceCategoriesTargetN: (state) => Array.from(new Set(state.services
-      .filter(service => service.targetGroup == 'N' || service.targetGroup == 'MN')
-      .map(service => service.categoryName))),
+   
+    serviceCategories: (state) => {
+      const uniqueCategories: IServiceCategory[] = [];
+      const encounteredCategories: Set<string> = new Set();
+    
+      for (const service of state.services) {
+        if (!encounteredCategories.has(service.categoryName!)) {
+          const category: IServiceCategory = {
+            categoryName: service.categoryName!,
+            description1: service.categoryDescription1,
+            description2: service.categoryDescription2,
+          };
+          uniqueCategories.push(category);
+          encounteredCategories.add(service.categoryName!);
+        }
+      }
+    
+      return uniqueCategories;
+    },
+    serviceCategoriesTargetM: (state) => {
+      const uniqueCategories: IServiceCategory[] = [];
+      const encounteredCategories: Set<string> = new Set();
+    
+      for (const service of state.services) {
+        if ((service.targetGroup === 'M' || service.targetGroup === 'MN') && !encounteredCategories.has(service.categoryName!)) {
+          const category: IServiceCategory = {
+            categoryName: service.categoryName!,
+            description1: service.categoryDescription1,
+            description2: service.categoryDescription2,
+          };
+          uniqueCategories.push(category);
+          encounteredCategories.add(service.categoryName!);
+        }
+      }
+    
+      return uniqueCategories;
+    },
+    serviceCategoriesTargetN: (state) => {
+      const uniqueCategories: IServiceCategory[] = [];
+      const encounteredCategories: Set<string> = new Set();
+    
+      for (const service of state.services) {
+        if ((service.targetGroup === 'N' || service.targetGroup === 'MN') && !encounteredCategories.has(service.categoryName!)) {
+          const category: IServiceCategory = {
+            categoryName: service.categoryName!,
+            description1: service.categoryDescription1,
+            description2: service.categoryDescription2,
+          };
+          uniqueCategories.push(category);
+          encounteredCategories.add(service.categoryName!);
+        }
+      }
+    
+      return uniqueCategories;
+    },
     publicServices: (state) => state.services.filter(service => service.isPublic),
   },
   actions: {

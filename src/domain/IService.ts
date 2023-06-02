@@ -16,5 +16,7 @@ export interface IService {
     salonId: string,
     serviceCategoryId: string,
     categoryName?: string,
+    categoryDescription1?: string,
+    categoryDescription2?: string,
     isPublic: boolean,
 }
