@@ -56,7 +56,7 @@ export default class ServiceCreate extends Vue {
       this.preparationTimeInMinutes && this.cleaningTimeInMinutes && this.amount && this.currency &&
       (this.isTargetGroupM || this.isTargetGroupN)) {
 
-      if (this.isTargetGroupM && this.isTargetGroupM) {
+      if (this.isTargetGroupM && this.isTargetGroupN) {
         this.targetGroupFinal = "MN";
       } else {
         this.targetGroupFinal = this.isTargetGroupN ? 'N' : 'M';
