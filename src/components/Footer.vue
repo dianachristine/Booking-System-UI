@@ -14,7 +14,7 @@
                     <!-- Content -->
                     <h6 class="text-uppercase fw-bold mb-4">Kersti ilutuba</h6>
                     <p>
-                        Avatud: E-R 10:00-18:00 <br>
+                        Avatud: E-R 11:00-19:00 <br>
                         Töö teistel aegadel ainult eelneval kokkuleppel. <br>
                         <br>
                         Tasumine sularahas või kaardiga.<br>
