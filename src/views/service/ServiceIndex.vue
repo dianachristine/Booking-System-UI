@@ -73,8 +73,18 @@ export default class ServiceIndex extends Vue {
                                                         :key="service.id">
 
                                                         <template v-if="service.isPublic">
-                                                            <ServiceInList :service=service servicePath="servicedetails"
-                                                                :idParam=service.id showDescription=true></ServiceInList>
+                                                            <RouterLink :to="{ name: 'servicedetails', params: { id: service.id } }"
+                                                                style="text-decoration: none; color:#191919;">
+                                                                {{ service.serviceName }}
+                                                                <br>
+                                                                <small class="text-muted">{{
+                                                                    service.description }}</small>
+                                                                <br> {{ service.serviceDurationInMinutes }} min <small
+                                                                    class="text-muted">(enne: {{
+                                                                    service.preparationTimeInMinutes }} min, koristus: {{
+                                                                    service.cleaningTimeInMinutes }} min) </small>
+                                                            </RouterLink>
+                                                            <span class="float-end">{{ service.finalPrice }}{{ service.currency }}</span>
                                                         </template>
                                                         <template v-else>
                                                             <RouterLink
@@ -84,7 +94,10 @@ export default class ServiceIndex extends Vue {
                                                                 <br>
                                                                 <small style="color:#b9bdc0">{{ service.description
                                                                 }}</small>
-                                                                <br> {{ service.serviceDurationInMinutes }} min
+                                                                <br> {{ service.serviceDurationInMinutes }} min <small
+                                                                    class="text-muted">(enne: {{
+                                                                        service.preparationTimeInMinutes }} min, koristus:
+                                                                    {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
                                                             <span class="float-end" style="color:#b9bdc0">{{
                                                                 service.finalPrice }}{{ service.currency }}</span>
@@ -103,12 +116,12 @@ export default class ServiceIndex extends Vue {
 
                                                 <div class="list-group mb-0">
                                                     <div class="list-group-item" style="background-color: #f8c6d3;">
-                                                    <b>{{ category.categoryName }}</b>
-                                                    <small v-if="category.description1"><br>{{ category.description1
-                                                    }}</small>
-                                                    <small v-if="category.description2"><br><b>{{ category.description2
-                                                    }}</b></small>
-                                                </div>
+                                                        <b>{{ category.categoryName }}</b>
+                                                        <small v-if="category.description1"><br>{{ category.description1
+                                                        }}</small>
+                                                        <small v-if="category.description2"><br><b>{{ category.description2
+                                                        }}</b></small>
+                                                    </div>
 
                                                     <div class="list-group-item" v-for="service of servicesStore.services.filter(service =>
                                                         service.categoryName === category.categoryName &&
@@ -116,8 +129,18 @@ export default class ServiceIndex extends Vue {
                                                         :key="service.id">
 
                                                         <template v-if="service.isPublic">
-                                                            <ServiceInList :service=service servicePath="servicedetails"
-                                                                :idParam=service.id showDescription=true></ServiceInList>
+                                                            <RouterLink :to="{ name: 'servicedetails', params: { id: service.id } }"
+                                                                style="text-decoration: none; color:#191919;">
+                                                                {{ service.serviceName }}
+                                                                <br>
+                                                                <small class="text-muted">{{
+                                                                    service.description }}</small>
+                                                                <br> {{ service.serviceDurationInMinutes }} min <small
+                                                                    class="text-muted">(enne: {{
+                                                                    service.preparationTimeInMinutes }} min, koristus: {{
+                                                                    service.cleaningTimeInMinutes }} min) </small>
+                                                            </RouterLink>
+                                                            <span class="float-end">{{ service.finalPrice }}{{ service.currency }}</span>
                                                         </template>
                                                         <template v-else>
                                                             <RouterLink
@@ -127,7 +150,10 @@ export default class ServiceIndex extends Vue {
                                                                 <br>
                                                                 <small style="color:#b9bdc0">{{ service.description
                                                                 }}</small>
-                                                                <br> {{ service.serviceDurationInMinutes }} min
+                                                                <br> {{ service.serviceDurationInMinutes }} min <small
+                                                                    class="text-muted">(enne: {{
+                                                                        service.preparationTimeInMinutes }} min, koristus:
+                                                                    {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
                                                             <span class="float-end" style="color:#b9bdc0">{{
                                                                 service.finalPrice }}{{ service.currency }}</span>
@@ -146,29 +172,41 @@ export default class ServiceIndex extends Vue {
 
                                                 <div class="list-group mb-0">
                                                     <div class="list-group-item" style="background-color: #f8c6d3;">
-                                                    <b>{{ category.categoryName }}</b>
-                                                    <small v-if="category.description1"><br>{{ category.description1
-                                                    }}</small>
-                                                </div>
+                                                        <b>{{ category.categoryName }}</b>
+                                                        <small v-if="category.description1"><br>{{ category.description1
+                                                        }}</small>
+                                                    </div>
 
                                                     <div class="list-group-item" v-for="service of servicesStore.services.filter(service =>
-                                                        service.categoryName === category.categoryName &&
-                                                        (service.targetGroup == 'M' || service.targetGroup == 'MN'))"
+                                                        service.categoryName === category.categoryName &&(service.targetGroup == 'M' || service.targetGroup == 'MN'))"
                                                         :key="service.id">
 
                                                         <template v-if="service.isPublic">
-                                                            <ServiceInList :service=service servicePath="servicedetails"
-                                                                :idParam=service.id showDescription=true></ServiceInList>
+                                                            <RouterLink :to="{ name: 'servicedetails', params: { id: service.id } }"
+                                                                style="text-decoration: none; color:#191919;">
+                                                                {{ service.serviceName }}
+                                                                <br>
+                                                                <small class="text-muted">{{
+                                                                    service.description }}</small>
+                                                                <br> {{ service.serviceDurationInMinutes }} min <small
+                                                                    class="text-muted">(enne: {{
+                                                                    service.preparationTimeInMinutes }} min, koristus: {{
+                                                                    service.cleaningTimeInMinutes }} min) </small>
+                                                            </RouterLink>
+                                                            <span class="float-end">{{ service.finalPrice }}{{ service.currency }}</span>
                                                         </template>
                                                         <template v-else>
                                                             <RouterLink
-                                                                :to="{ name: 'servicedetails', params: { id: service.id } }"
+                                                                :to=" { name: 'servicedetails', params: { id: service.id } } "
                                                                 style="text-decoration: none; color:#b9bdc0">
                                                                 {{ service.serviceName }}
                                                                 <br>
                                                                 <small style="color:#b9bdc0">{{ service.description
-                                                                }}</small>
-                                                                <br> {{ service.serviceDurationInMinutes }} min
+                                                                    }}</small>
+                                                                <br> {{ service.serviceDurationInMinutes }} min <small
+                                                                    class="text-muted">(enne: {{
+                                                                    service.preparationTimeInMinutes }} min, koristus:
+                                                                    {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
                                                             <span class="float-end" style="color:#b9bdc0">{{
                                                                 service.finalPrice }}{{ service.currency }}</span>
@@ -181,14 +219,15 @@ export default class ServiceIndex extends Vue {
                                     </div>
                                 </div>
 
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </template>
+    <template v-else>
+        <div style="height: 50px;"></div>
+    </template>
 </template>
-<template v-else>
-    <div style="height: 50px;"></div>
-</template></template>

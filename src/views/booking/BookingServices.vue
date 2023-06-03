@@ -65,7 +65,7 @@ export default class BookingServices extends Vue {
                                                     v-for="service of servicesStore.services.filter(service => 
                                                     service.categoryName === category.categoryName && service.isPublic)"
                                                     :key="service.id" v>
-                                                    <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id></ServiceInList>
+                                                    <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id showDescription=true></ServiceInList>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@ export default class BookingServices extends Vue {
                                                     service.categoryName === category.categoryName && service.isPublic &&
                                                     (service.targetGroup == 'N' || service.targetGroup == 'MN'))"
                                                     :key="service.id" v>
-                                                    <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id></ServiceInList>
+                                                    <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id showDescription=true></ServiceInList>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@ export default class BookingServices extends Vue {
                                                     service.categoryName === category.categoryName && service.isPublic &&
                                                     (service.targetGroup == 'M' || service.targetGroup == 'MN'))"
                                                     :key="service.id" v>
-                                                    <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id></ServiceInList>
+                                                    <ServiceInList :service=service servicePath="bookingtime" :idParam=service.id showDescription=true></ServiceInList>
                                                 </div>
                                             </div>
                                         </div>
