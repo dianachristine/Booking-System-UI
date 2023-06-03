@@ -81,10 +81,16 @@ export default class ServiceIndex extends Vue {
                                                                     service.description }}</small>
                                                                 <br> {{ service.serviceDurationInMinutes }} min <small
                                                                     class="text-muted">(enne: {{
-                                                                    service.preparationTimeInMinutes }} min, koristus: {{
-                                                                    service.cleaningTimeInMinutes }} min) </small>
+                                                                      service.preparationTimeInMinutes }} min, koristus: {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
-                                                            <span class="float-end">{{ service.finalPrice }}{{ service.currency }}</span>
+                                                            <span class="float-end" v-if="service.discountPercent">
+                                                                <s>{{ service.amount }}{{ service.currency }}</s>
+                                                                &nbsp;
+                                                                <b>{{ service.finalPrice }}{{ service.currency }}</b>
+                                                            </span>
+                                                            <span class="float-end" v-else>
+                                                                {{ service.finalPrice }}{{ service.currency }}
+                                                            </span>
                                                         </template>
                                                         <template v-else>
                                                             <RouterLink
@@ -99,8 +105,14 @@ export default class ServiceIndex extends Vue {
                                                                         service.preparationTimeInMinutes }} min, koristus:
                                                                     {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
-                                                            <span class="float-end" style="color:#b9bdc0">{{
-                                                                service.finalPrice }}{{ service.currency }}</span>
+                                                            <span class="float-end" v-if="service.discountPercent">
+                                                                <s>{{ service.amount }}{{ service.currency }}</s>
+                                                                &nbsp;
+                                                                <b>{{ service.finalPrice }}{{ service.currency }}</b>
+                                                            </span>
+                                                            <span class="float-end" v-else>
+                                                                {{ service.finalPrice }}{{ service.currency }}
+                                                            </span>
                                                         </template>
 
                                                     </div>
@@ -137,10 +149,16 @@ export default class ServiceIndex extends Vue {
                                                                     service.description }}</small>
                                                                 <br> {{ service.serviceDurationInMinutes }} min <small
                                                                     class="text-muted">(enne: {{
-                                                                    service.preparationTimeInMinutes }} min, koristus: {{
-                                                                    service.cleaningTimeInMinutes }} min) </small>
+                                                                        service.preparationTimeInMinutes }} min, koristus: {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
-                                                            <span class="float-end">{{ service.finalPrice }}{{ service.currency }}</span>
+                                                            <span class="float-end" v-if="service.discountPercent">
+                                                                <s>{{ service.amount }}{{ service.currency }}</s>
+                                                                &nbsp;
+                                                                <b>{{ service.finalPrice }}{{ service.currency }}</b>
+                                                            </span>
+                                                            <span class="float-end" v-else>
+                                                                {{ service.finalPrice }}{{ service.currency }}
+                                                            </span>
                                                         </template>
                                                         <template v-else>
                                                             <RouterLink
@@ -155,8 +173,14 @@ export default class ServiceIndex extends Vue {
                                                                         service.preparationTimeInMinutes }} min, koristus:
                                                                     {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
-                                                            <span class="float-end" style="color:#b9bdc0">{{
-                                                                service.finalPrice }}{{ service.currency }}</span>
+                                                            <span class="float-end" v-if="service.discountPercent">
+                                                                <s>{{ service.amount }}{{ service.currency }}</s>
+                                                                &nbsp;
+                                                                <b>{{ service.finalPrice }}{{ service.currency }}</b>
+                                                            </span>
+                                                            <span class="float-end" v-else>
+                                                                {{ service.finalPrice }}{{ service.currency }}
+                                                            </span>
                                                         </template>
 
                                                     </div>
@@ -177,8 +201,9 @@ export default class ServiceIndex extends Vue {
                                                         }}</small>
                                                     </div>
 
-                                                    <div class="list-group-item" v-for="service of servicesStore.services.filter(service =>
-                                                        service.categoryName === category.categoryName &&(service.targetGroup == 'M' || service.targetGroup == 'MN'))"
+                                                    <div class="list-group-item"
+                                                        v-for="service of servicesStore.services.filter(service =>
+                                                            service.categoryName === category.categoryName && (service.targetGroup == 'M' || service.targetGroup == 'MN'))"
                                                         :key="service.id">
 
                                                         <template v-if="service.isPublic">
@@ -190,26 +215,37 @@ export default class ServiceIndex extends Vue {
                                                                     service.description }}</small>
                                                                 <br> {{ service.serviceDurationInMinutes }} min <small
                                                                     class="text-muted">(enne: {{
-                                                                    service.preparationTimeInMinutes }} min, koristus: {{
-                                                                    service.cleaningTimeInMinutes }} min) </small>
+                                                                        service.preparationTimeInMinutes }} min, koristus: {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
-                                                            <span class="float-end">{{ service.finalPrice }}{{ service.currency }}</span>
+                                                            <span class="float-end" v-if="service.discountPercent">
+                                                                <s>{{ service.amount }}{{ service.currency }}</s>
+                                                                &nbsp;
+                                                                <b>{{ service.finalPrice }}{{ service.currency }}</b>
+                                                            </span>
+                                                            <span class="float-end" v-else>
+                                                                {{ service.finalPrice }}{{ service.currency }}
+                                                            </span>
                                                         </template>
                                                         <template v-else>
-                                                            <RouterLink
-                                                                :to=" { name: 'servicedetails', params: { id: service.id } } "
+                                                            <RouterLink :to="{ name: 'servicedetails', params: { id: service.id } }"
                                                                 style="text-decoration: none; color:#b9bdc0">
                                                                 {{ service.serviceName }}
                                                                 <br>
                                                                 <small style="color:#b9bdc0">{{ service.description
-                                                                    }}</small>
+                                                                }}</small>
                                                                 <br> {{ service.serviceDurationInMinutes }} min <small
                                                                     class="text-muted">(enne: {{
-                                                                    service.preparationTimeInMinutes }} min, koristus:
+                                                                        service.preparationTimeInMinutes }} min, koristus:
                                                                     {{ service.cleaningTimeInMinutes }} min) </small>
                                                             </RouterLink>
-                                                            <span class="float-end" style="color:#b9bdc0">{{
-                                                                service.finalPrice }}{{ service.currency }}</span>
+                                                            <span class="float-end" v-if="service.discountPercent">
+                                                                <s>{{ service.amount }}{{ service.currency }}</s>
+                                                                &nbsp;
+                                                                <b>{{ service.finalPrice }}{{ service.currency }}</b>
+                                                            </span>
+                                                            <span class="float-end" v-else>
+                                                                {{ service.finalPrice }}{{ service.currency }}
+                                                            </span>
                                                         </template>
 
                                                     </div>
@@ -227,7 +263,6 @@ export default class ServiceIndex extends Vue {
             </div>
         </section>
     </template>
-    <template v-else>
-        <div style="height: 50px;"></div>
-    </template>
-</template>
+<template v-else>
+    <div style="height: 50px;"></div>
+</template></template>
