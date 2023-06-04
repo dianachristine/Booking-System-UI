@@ -80,6 +80,9 @@ export default class BookingClient extends Vue {
 
         if (this.firstName && this.lastName && this.email && this.countryCode && this.phoneNumber && this.termsAndConditionsAccepted) {
 
+            if (typeof(this.phoneNumber) == 'number') {
+                this.phoneNumber = String(this.phoneNumber);
+            }
             var clientToAdd: IClient = {
                 firstName: this.firstName,
                 lastName: this.lastName,
