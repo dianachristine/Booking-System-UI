@@ -90,13 +90,12 @@ export default class UserBookingEdit extends Vue {
         });
     }
 
-    getAvailableTimesForSchedule(schedule: IWorkSchedule, servicesStore: any) {
-        console.log(schedule)
+    getAvailableTimesForSchedule(schedule: IWorkSchedule, bookingsStore: any) {
+        const servicePrepTime = Math.floor((new Date(bookingsStore.$state.booking.fromForClient).getTime() - new Date(bookingsStore.$state.booking.from).getTime()) / 1000 / 60);
+        const serviceCleaningTime = Math.floor((new Date(bookingsStore.$state.booking.to).getTime() - new Date(bookingsStore.$state.booking.toForClient).getTime()) / 1000 / 60);
         const availableTimes = [];
-        const startDate = new Date(new Date(schedule.from).getTime() + servicesStore.$state.service?.preparationTimeInMinutes * 60000);
-        console.log(startDate)
+        const startDate = new Date(new Date(schedule.from).getTime() + servicePrepTime * 60000);
         const endDate = new Date(schedule.to);
-
         // Round the start date up to the nearest half hour
         if (startDate.getMinutes() <= 30) {
             startDate.setMinutes(30);
@@ -104,43 +103,21 @@ export default class UserBookingEdit extends Vue {
             startDate.setHours(startDate.getHours() + 1);
             startDate.setMinutes(0);
         }
-
         // Round the end date down to the nearest half hour
         if (endDate.getMinutes() > 30) {
             endDate.setMinutes(30);
         } else {
             endDate.setMinutes(0);
         }
-
-        console.log(startDate)
-        console.log(endDate)
-
-        const serviceDurationInMinutes = servicesStore.$state.service?.serviceDurationInMinutes;
-        const cleaningTimeInMinutes = servicesStore.$state.service?.cleaningTimeInMinutes;
-
-        let currentServiceStartTime = startDate;
-        let currentServiceEndTime = new Date(startDate.getTime() + (serviceDurationInMinutes + cleaningTimeInMinutes) * 60000);
-        console.log(currentServiceStartTime)
-        console.log(currentServiceEndTime)
-
         // Loop through the available half hours and add them to the array
-        while (currentServiceEndTime <= endDate) {
-
+        while (new Date(startDate.getTime() +
+            (bookingsStore.$state.booking?.serviceDurationInMinutes + serviceCleaningTime) * 60000) <= endDate) {
             availableTimes.push({
                 workScheduleId: schedule.workScheduleId,
-                time: new Date(currentServiceStartTime), // brauser local time
-                //time: (new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3),
+                time: new Date(startDate), // brauser local time
             });
-            console.log(availableTimes)
-
-            //availableTimes.push((new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3));
-            currentServiceStartTime.setMinutes(currentServiceStartTime.getMinutes() + 30);
-            console.log(currentServiceStartTime)
-
-            currentServiceEndTime.setMinutes(currentServiceEndTime.getMinutes() + 30);
-            console.log(currentServiceEndTime)
+            startDate.setMinutes(startDate.getMinutes() + 30);
         }
-
         return availableTimes;
     }
 
@@ -272,8 +249,7 @@ export default class UserBookingEdit extends Vue {
                                                 <label class="control-label" for="date">Vali kuupäev *</label>
                                                 <VueDatePicker v-model="date" auto-apply locale="et-ee"
                                                     :enable-time-picker="false" :format="format"
-                                                    :disabled-dates="disabledDates"
-                                                    :min-date="minDate" :max-date="maxDate">
+                                                    :disabled-dates="disabledDates" :min-date="minDate" :max-date="maxDate">
                                                 </VueDatePicker>
                                             </div>
                                             <div class="form-group">
@@ -315,4 +291,5 @@ export default class UserBookingEdit extends Vue {
     </template>
     <template v-else>
         <div style="height: 50px;"></div>
-</template></template>
+    </template>
+</template>
