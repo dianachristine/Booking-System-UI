@@ -17,12 +17,6 @@ import type { IWorkSchedule } from '@/domain/IWorkSchedule';
   emits: []
 })
 export default class BookingTime extends Vue {
-  textInputOptions = {
-    enterSubmit: true,
-    tabSubmit: true,
-    format: 'dd.MM.yyyy'
-  };
-
   format = (date: any) => {
     if (date) {
       const day = ('0' + date.getDate()).slice(-2);
@@ -40,6 +34,7 @@ export default class BookingTime extends Vue {
   id!: string;
   errors: [string] | null = null;
   date: string | null = null;
+  previousDate: string | null = null;
   timeAndSchedule: { workScheduleId: string, time: Date } | null = null;
   minDate: Date | string = new Date();
   maxDate: Date | string = new Date();
@@ -59,18 +54,18 @@ export default class BookingTime extends Vue {
 
     var availableTimesCurrentMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 1), this.id)
     var availableTimesNextMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 2), this.id);
-    
+
     if (availableTimesCurrentMonth.length > 0) {
       this.minDate = new Date(availableTimesCurrentMonth[0].from);
     } else {
       this.minDate = new Date(availableTimesNextMonth[0].from);
     }
-    
+
     if (availableTimesNextMonth.length > 0) {
       this.maxDate = new Date(availableTimesNextMonth[availableTimesNextMonth.length - 1].from);
     } else {
       this.maxDate = new Date(availableTimesCurrentMonth[availableTimesCurrentMonth.length - 1].from);
-    }  
+    }
 
     this.workScheduleStore.$state.availableTimes = [...availableTimesCurrentMonth, ...availableTimesNextMonth];
     this.availableTimes = [...availableTimesCurrentMonth, ...availableTimesNextMonth]
@@ -91,9 +86,59 @@ export default class BookingTime extends Vue {
     });
   }
 
+  getAvailableTimesForSchedule(schedule: IWorkSchedule, servicesStore: any) {
+    console.log(schedule)
+    const availableTimes = [];
+    const startDate = new Date(new Date(schedule.from).getTime() + servicesStore.$state.service?.preparationTimeInMinutes * 60000);
+    console.log(startDate)
+    const endDate = new Date(schedule.to);
+
+    // Round the start date up to the nearest half hour
+    if (startDate.getMinutes() <= 30) {
+      startDate.setMinutes(30);
+    } else {
+      startDate.setHours(startDate.getHours() + 1);
+      startDate.setMinutes(0);
+    }
+
+    // Round the end date down to the nearest half hour
+    if (endDate.getMinutes() > 30) {
+      endDate.setMinutes(30);
+    } else {
+      endDate.setMinutes(0);
+    }
+
+    console.log(startDate)
+    console.log(endDate)
+
+    const serviceDurationInMinutes = servicesStore.$state.service?.serviceDurationInMinutes;
+    const cleaningTimeInMinutes = servicesStore.$state.service?.cleaningTimeInMinutes;
+
+    let currentServiceEndTime = new Date(startDate.getTime() + (serviceDurationInMinutes + cleaningTimeInMinutes) * 60000);
+    console.log(currentServiceEndTime)
+
+    // Loop through the available half hours and add them to the array
+    while (currentServiceEndTime <= endDate) {
+
+      availableTimes.push({
+        workScheduleId: schedule.workScheduleId,
+        time: new Date(currentServiceEndTime), // brauser local time
+        //time: (new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3),
+      });
+      console.log(availableTimes)
+
+      //availableTimes.push((new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3));
+      currentServiceEndTime.setMinutes(currentServiceEndTime.getMinutes() + 30);
+      console.log(currentServiceEndTime)
+    }
+
+    return availableTimes;
+  }
+
   updated(): void {
-    if (this.date) {
+    if (this.date && this.date != this.previousDate) {
       var dateAsDate = new Date(this.date!);
+
 
       var availableWorkSchedulesForSelectedDate = this.availableTimes?.filter((time) => {
         var timeAsDate = new Date(time.from);
@@ -103,8 +148,10 @@ export default class BookingTime extends Vue {
 
       this.availableTimesForSelectedDate = [];
 
+      console.log(availableWorkSchedulesForSelectedDate)
+
       availableWorkSchedulesForSelectedDate?.forEach((schedule) => {
-        const timesForSchedule = getAvailableTimesForSchedule(schedule, this.servicesStore);
+        const timesForSchedule = this.getAvailableTimesForSchedule(schedule, this.servicesStore);
 
         timesForSchedule.forEach((time) => {
           this.availableTimesForSelectedDate.push({
@@ -114,52 +161,9 @@ export default class BookingTime extends Vue {
         });
       });
 
-      
-      function getAvailableTimesForSchedule(schedule: IWorkSchedule, servicesStore: any) {
-        console.log(schedule)
-        const availableTimes = [];
-        const startDate = new Date(new Date(schedule.from).getTime() + servicesStore.$state.service?.preparationTimeInMinutes * 60000);
-        console.log(startDate)
-        const endDate = new Date(schedule.to);
-
-        // Round the start date up to the nearest half hour
-        if (startDate.getMinutes() <= 30) {
-          startDate.setMinutes(30);
-        } else {
-          startDate.setHours(startDate.getHours() + 1);
-          startDate.setMinutes(0);
-        }
-
-        // Round the end date down to the nearest half hour
-        if (endDate.getMinutes() > 30) {
-          endDate.setMinutes(30);
-        } else {
-          endDate.setMinutes(0);
-        }
-
-        console.log(startDate)
-        console.log(endDate)
-
-        // Loop through the available half hours and add them to the array
-        while (new Date(startDate.getTime() + 
-        (servicesStore.$state.service?.serviceDurationInMinutes + servicesStore.$state.service?.cleaningTimeInMinutes) * 60000) <= endDate) {
-
-          availableTimes.push({
-            workScheduleId: schedule.workScheduleId,
-            time: new Date(startDate), // brauser local time
-            //time: (new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3),
-          });
-          console.log(availableTimes)
-
-          //availableTimes.push((new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3));
-          startDate.setMinutes(startDate.getMinutes() + 30);
-        }
-
-        return availableTimes;
-      }
+      this.previousDate = this.date;
     }
   }
-
 
   async submitClicked(): Promise<void> {
     this.errors = null;
@@ -209,8 +213,8 @@ export default class BookingTime extends Vue {
                   <div>
                     <div class="form-group">
                       <label class="control-label" for="date">Vali kuupäev *</label>
-                      <VueDatePicker v-model="date" text-input auto-apply locale="et-ee" :enable-time-picker="false"
-                        :format="format" :text-input-options="textInputOptions" :disabled-dates="disabledDates"
+                      <VueDatePicker v-model="date" auto-apply locale="et-ee" :enable-time-picker="false"
+                        :format="format" :disabled-dates="disabledDates"
                         :min-date="minDate" :max-date="maxDate">
                       </VueDatePicker>
                     </div>
@@ -218,7 +222,8 @@ export default class BookingTime extends Vue {
                       <label class="control-label" for="Cateogry">Vali kellaaeg *</label>
                       <select v-model="timeAndSchedule" :disabled="date == null" class="form-control">
                         <option v-for="timeAndSchedule in availableTimesForSelectedDate" :value="timeAndSchedule">
-                          {{ timeAndSchedule.time.toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"}).slice(0, -3) }}
+                          {{ timeAndSchedule.time.toLocaleTimeString("et-EE", { timeZone: "Europe/Tallinn" }).slice(0, -3)
+                          }}
                         </option>
                       </select>
                     </div>
@@ -232,7 +237,7 @@ export default class BookingTime extends Vue {
                     </div>
                     <br>
                     <RouterLink to="/broneering/teenused" class="nav-link" active-class="active"
-                          style="text-decoration: underline;">Tagasi</RouterLink>
+                      style="text-decoration: underline;">Tagasi</RouterLink>
                   </div>
                   <br />
                 </div>
