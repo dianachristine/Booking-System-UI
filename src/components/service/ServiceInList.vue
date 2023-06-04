@@ -21,7 +21,7 @@ export default class ServiceInList extends Vue {
 
 <template>
     <div v-if="servicePath">
-        <RouterLink :to="{ name: servicePath, params: { id: idParam } }" style="text-decoration: none; color:#191919;">
+        <RouterLink :to="{ name: servicePath, params: { id: idParam } }" style="text-decoration: none; color:#191919;" tag="button">
             {{ service.serviceName }}
             <br v-if="showDescription">
             <small v-if="showDescription" class="text-muted">{{ service.description }}</small>
@@ -52,6 +52,6 @@ export default class ServiceInList extends Vue {
         <span class="float-end" v-else>
             {{ service.finalPrice }}{{ service.currency }}
         </span>
-        
+
     </div>
 </template>
