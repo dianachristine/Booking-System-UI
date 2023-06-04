@@ -56,8 +56,8 @@ export default class UserBookingEdit extends Vue {
 
         var dateNow = new Date();
 
-        var availableTimesCurrentMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 1), this.id)
-        var availableTimesNextMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 2), this.id);
+        var availableTimesCurrentMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 1), this.bookingStore.booking?.serviceId!)
+        var availableTimesNextMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 2), this.bookingStore.booking?.serviceId!);
 
         if (availableTimesCurrentMonth.length > 0) {
             this.minDate = new Date(availableTimesCurrentMonth[0].from);
