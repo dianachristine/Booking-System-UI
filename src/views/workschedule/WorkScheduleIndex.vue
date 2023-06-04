@@ -79,7 +79,7 @@ export default class WorkScheduleIndex extends Vue {
                                             </div>
                                         </div>
                                         <div v-if="workSchedulesStore.workSchedulesInFuture.length == 0">
-                                            Tulevasi broneeringuid pole.
+                                            Tulevasi tööaegu pole.
                                         </div>
                                     </div>
 
@@ -106,7 +106,7 @@ export default class WorkScheduleIndex extends Vue {
                                             </div>
                                         </div>
                                         <div v-if="workSchedulesStore.workSchedulesInPast.length == 0">
-                                            Varasemaid broneeringuid pole.
+                                            Varasemaid tööaegu pole.
                                         </div>
                                     </div>
                                 </div>

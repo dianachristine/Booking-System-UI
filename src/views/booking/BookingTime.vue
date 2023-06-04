@@ -58,10 +58,19 @@ export default class BookingTime extends Vue {
     var dateNow = new Date();
 
     var availableTimesCurrentMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 1), this.id)
-    this.minDate = new Date(availableTimesCurrentMonth[0].from);
-
     var availableTimesNextMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 2), this.id);
-    this.maxDate = new Date(availableTimesNextMonth[availableTimesNextMonth.length - 1].from);
+    
+    if (availableTimesCurrentMonth.length > 0) {
+      this.minDate = new Date(availableTimesCurrentMonth[0].from);
+    } else {
+      this.minDate = new Date(availableTimesNextMonth[0].from);
+    }
+    
+    if (availableTimesNextMonth.length > 0) {
+      this.maxDate = new Date(availableTimesNextMonth[availableTimesNextMonth.length - 1].from);
+    } else {
+      this.maxDate = new Date(availableTimesCurrentMonth[availableTimesCurrentMonth.length - 1].from);
+    }  
 
     this.workScheduleStore.$state.availableTimes = [...availableTimesCurrentMonth, ...availableTimesNextMonth];
     this.availableTimes = [...availableTimesCurrentMonth, ...availableTimesNextMonth]
