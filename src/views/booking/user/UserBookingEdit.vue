@@ -270,9 +270,9 @@ export default class UserBookingEdit extends Vue {
                                         <div>
                                             <div class="form-group">
                                                 <label class="control-label" for="date">Vali kuupäev *</label>
-                                                <VueDatePicker v-model="date" text-input auto-apply locale="et-ee"
+                                                <VueDatePicker v-model="date" auto-apply locale="et-ee"
                                                     :enable-time-picker="false" :format="format"
-                                                    :text-input-options="textInputOptions" :disabled-dates="disabledDates"
+                                                    :disabled-dates="disabledDates"
                                                     :min-date="minDate" :max-date="maxDate">
                                                 </VueDatePicker>
                                             </div>
