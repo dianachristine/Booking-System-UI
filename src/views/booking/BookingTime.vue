@@ -50,6 +50,7 @@ export default class BookingTime extends Vue {
 
   async beforeCreate(): Promise<void> {
     this.servicesStore.$state.service = await this.ServiceService.get(this.id);
+    
     var dateNow = new Date();
 
     var availableTimesCurrentMonth = await this.workScheduleService.getAvailabletimes(dateNow.getFullYear(), (dateNow.getMonth() + 1), this.id)
@@ -132,7 +133,7 @@ export default class BookingTime extends Vue {
       //availableTimes.push((new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3));
       currentServiceStartTime.setMinutes(currentServiceStartTime.getMinutes() + 30);
       console.log(currentServiceStartTime)
-      
+
       currentServiceEndTime.setMinutes(currentServiceEndTime.getMinutes() + 30);
       console.log(currentServiceEndTime)
     }

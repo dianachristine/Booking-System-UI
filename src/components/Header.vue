@@ -60,7 +60,7 @@ export default class Header extends Vue {
                         </template>
                         <template v-else>
                             <li class="nav-item">
-                                <RouterLink to="/teenused" class="nav-link" active-class="active">Teenused</RouterLink>
+                                <RouterLink to="/broneering/teenused" class="nav-link" active-class="active">Teenused</RouterLink>
                             </li>
                          <!--   <li class="nav-item">
                                 <RouterLink to="/meist" class="nav-link" active-class="active">Salongist</RouterLink>

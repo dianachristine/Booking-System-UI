@@ -183,7 +183,7 @@ export default class BookingClient extends Vue {
                                         <div class="form-group d-flex">
                                             <input v-model="countryCode" class="form-control flex-grow-1"
                                                 style="width: 4rem" type="text" />
-                                            <input v-model="phoneNumber" class="form-control flex-grow-1" type="text" />
+                                            <input v-model="phoneNumber" class="form-control flex-grow-1" type="number" />
                                         </div>
 
                                         <div class="form-group">
