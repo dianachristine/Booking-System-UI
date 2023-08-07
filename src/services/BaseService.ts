@@ -18,7 +18,6 @@ export class BaseService<TEntity> {
                     "Authorization": "bearer " + this.identityStore.$state.response?.token
                 }
             });
-            console.log(response);
 
             let res = response.data as TEntity[];
             return res;
@@ -39,7 +38,6 @@ export class BaseService<TEntity> {
                         "Authorization": "bearer " + this.identityStore.$state.response?.token
                     }
                 });
-                console.log(response);
 
                 let res = response.data as TEntity[];
                 return res;
@@ -60,7 +58,6 @@ export class BaseService<TEntity> {
                     }
                 }
             );
-            console.log(response);
             let res = response.data as TEntity;
             return res;
         } catch (e) {
@@ -82,7 +79,6 @@ export class BaseService<TEntity> {
                         }
                     }
                 );
-                console.log(response);
 
                 let res = response.data as TEntity;
                 return res;
@@ -107,7 +103,6 @@ export class BaseService<TEntity> {
                     }
                 }
             );
-            console.log(response)
         } catch (e) {
             let res = {
                 status: (e as AxiosError).response!.status,
@@ -129,7 +124,6 @@ export class BaseService<TEntity> {
                         }
                     }
                 );
-                console.log(response);
 
                 return { status: response.status, data: response.data.id };
 
@@ -151,7 +145,6 @@ export class BaseService<TEntity> {
                     }
                 }
             );
-            console.log(response)
         } catch (e) {
             let res = {
                 status: (e as AxiosError).response!.status,
@@ -173,7 +166,6 @@ export class BaseService<TEntity> {
                         }
                     }
                 );
-                console.log(response);
 
                 return { status: response.status, data: response.data.id };
             }
@@ -195,7 +187,6 @@ export class BaseService<TEntity> {
                     }
                 }
             );
-            console.log(response);
         } catch (e) {
             let res = {
                 status: (e as AxiosError).response!.status,
@@ -216,7 +207,6 @@ export class BaseService<TEntity> {
                     }
                 }
             );
-                console.log(response);
 
                 return { status: response.status, data: response.data.id };
             }

@@ -17,7 +17,6 @@ export class WorkScheduleService extends BaseService<IWorkSchedule> {
                 "Authorization": "bearer " + this.identityStore.$state.response?.token
             }
         });
-        console.log(response);
 
         let res = response.data as IWorkSchedule[];
         return res;

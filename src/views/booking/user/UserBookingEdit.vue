@@ -174,9 +174,7 @@ export default class UserBookingEdit extends Vue {
             const endDateStringLocal = new Date(serviceStartTimeForClientLocal!.getTime() + (this.bookingStore.booking?.serviceDurationInMinutes! + serviceCleaningTime) * 60000);
 
             const startUtcString = new Date(startDateStringLocal).toISOString();
-            console.log(startUtcString)
             const endUtcString = new Date(endDateStringLocal).toISOString();
-            console.log(endUtcString)
 
             let bookingToChange: IBooking = {
                 id: this.id,
@@ -187,7 +185,6 @@ export default class UserBookingEdit extends Vue {
                 clientId: this.bookingStore.booking!.clientId,
                 workScheduleId: this.timeAndSchedule.workScheduleId,
             }
-            console.log(bookingToChange);
 
             var res = await this.bookingService.edit(bookingToChange, this.id);
             if (res.status >= 300) {

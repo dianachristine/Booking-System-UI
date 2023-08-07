@@ -33,7 +33,6 @@ export class SalonService extends BaseService<ISalon> {
                     }
                 }
             );
-            console.log(response)
         } catch (e) {
             let res = {
                 status: (e as AxiosError).response!.status,

@@ -88,10 +88,8 @@ export default class BookingTime extends Vue {
   }
 
   getAvailableTimesForSchedule(schedule: IWorkSchedule, servicesStore: any) {
-    console.log(schedule)
     const availableTimes = [];
     const startDate = new Date(new Date(schedule.from).getTime() + servicesStore.$state.service?.preparationTimeInMinutes * 60000);
-    console.log(startDate)
     const endDate = new Date(schedule.to);
 
     // Round the start date up to the nearest half hour
@@ -109,16 +107,11 @@ export default class BookingTime extends Vue {
       endDate.setMinutes(0);
     }
 
-    console.log(startDate)
-    console.log(endDate)
-
     const serviceDurationInMinutes = servicesStore.$state.service?.serviceDurationInMinutes;
     const cleaningTimeInMinutes = servicesStore.$state.service?.cleaningTimeInMinutes;
 
     let currentServiceStartTime = startDate;
     let currentServiceEndTime = new Date(startDate.getTime() + (serviceDurationInMinutes + cleaningTimeInMinutes) * 60000);
-    console.log(currentServiceStartTime)
-    console.log(currentServiceEndTime)
 
     // Loop through the available half hours and add them to the array
     while (currentServiceEndTime <= endDate) {
@@ -128,14 +121,11 @@ export default class BookingTime extends Vue {
         time: new Date(currentServiceStartTime), // brauser local time
         //time: (new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3),
       });
-      console.log(availableTimes)
 
       //availableTimes.push((new Date(startDate).toLocaleTimeString("et-EE", {timeZone: "Europe/Tallinn"})).slice(0, -3));
       currentServiceStartTime.setMinutes(currentServiceStartTime.getMinutes() + 30);
-      console.log(currentServiceStartTime)
 
       currentServiceEndTime.setMinutes(currentServiceEndTime.getMinutes() + 30);
-      console.log(currentServiceEndTime)
     }
 
     return availableTimes;
@@ -153,8 +143,6 @@ export default class BookingTime extends Vue {
       });
 
       this.availableTimesForSelectedDate = [];
-
-      console.log(availableWorkSchedulesForSelectedDate)
 
       availableWorkSchedulesForSelectedDate?.forEach((schedule) => {
         const timesForSchedule = this.getAvailableTimesForSchedule(schedule, this.servicesStore);

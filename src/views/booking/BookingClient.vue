@@ -112,7 +112,6 @@ export default class BookingClient extends Vue {
                     clientId: clientId,
                     workScheduleId: this.workScheduleid
                 }
-                console.log(bookingToAdd);
 
                 var res = await this.bookingService.add(bookingToAdd);
 

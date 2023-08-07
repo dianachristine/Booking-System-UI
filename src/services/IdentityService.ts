@@ -26,8 +26,6 @@ export class IdentityService {
               //  errors: (e as AxiosError).response!.data.errors,
             }
 
-            console.log(response);
-
             console.log((e as AxiosError).response);
 
             return response;
@@ -65,7 +63,6 @@ export class IdentityService {
              //   errors: (e as AxiosError).response!.data.errors,
             }
 
-            console.log(response);
 
             console.log((e as AxiosError).response);
 
@@ -75,8 +72,6 @@ export class IdentityService {
 
     async refreshIdentity(): Promise<IServiceResult<IJWTResponse>> {
         try {
-            console.log(this.identityStore.$state.response);
-
             let response = await httpCLient.post("/identity/account/refreshtoken",
                 {
                     jwt: this.identityStore.$state.response?.token,
@@ -95,7 +90,6 @@ export class IdentityService {
              //   errorMsg: (e as AxiosError).response!.data.error,
             }
 
-            console.log(response);
 
             console.log((e as AxiosError).response);
 
@@ -134,8 +128,6 @@ export class IdentityService {
                 this.identityStore.$state.response = null;
                 localStorage.removeItem("IJWTResponse");
             }
-
-            console.log(response);
 
             console.log((e as AxiosError).response);
 

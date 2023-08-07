@@ -19,7 +19,6 @@ export default class CategoryCreate extends Vue {
 
 
   async submitClicked(): Promise<void> {
-    console.log('submitClicked');
 
     if (this.categoryName.length > 0 && this.categoryName.length > 0) {
 

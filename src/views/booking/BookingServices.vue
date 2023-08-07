@@ -23,7 +23,6 @@ export default class BookingServices extends Vue {
     ServiceService = new ServiceService();
 
     async mounted(): Promise<void> {
-        console.log("mounted");
         this.servicesStore.$state.services =
             await this.ServiceService.getAll();
     }
