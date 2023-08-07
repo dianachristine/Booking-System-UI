@@ -28,6 +28,9 @@ import ClientIndex from '../views/client/ClientIndex.vue'
 import SalonInfo from '../views/salon/SalonInfo.vue'
 import SalonEdit from '../views/salon/SalonEdit.vue'
 
+console.log("url")
+console.log(import.meta.env.BASE_URL);
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
