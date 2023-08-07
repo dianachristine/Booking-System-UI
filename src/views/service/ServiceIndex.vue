@@ -41,12 +41,12 @@ export default class ServiceIndex extends Vue {
                     <div class="col col-xl-10">
                         <div class="card">
                             <div class="card-body p-4">
-                                <template v-if="servicesStore.serviceCategories.length > 0">
-                                    <PinkButton buttonPathName="servicecreate" buttonText="Lisa uus teenus"
+                                <PinkButton buttonPathName="servicecreate" buttonText="Lisa uus teenus"
                                         :onRight="true" />
                                     <PinkButton buttonPathName="categoryindex" buttonText="Muuda kategooriaid"
                                         :onRight="true" />
-
+                                <template v-if="servicesStore.serviceCategories.length > 0">
+                                    
                                     <ServiceFilters />
 
                                     <div class="tab-content" id="target-content">
@@ -60,7 +60,7 @@ export default class ServiceIndex extends Vue {
                                                 <div class="col-md-12">
 
                                                     <div class="list-group mb-0">
-                                                        <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                        <div class="list-group-item" style="background-color: #f8dae2;">
                                                             <b>{{ category.categoryName }}</b>
                                                             <small v-if="category.description1"><br>{{ category.description1
                                                             }}</small>
@@ -130,7 +130,7 @@ export default class ServiceIndex extends Vue {
                                                 <div class="col-md-12">
 
                                                     <div class="list-group mb-0">
-                                                        <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                        <div class="list-group-item" style="background-color: #f8dae2;">
                                                             <b>{{ category.categoryName }}</b>
                                                             <small v-if="category.description1"><br>{{ category.description1
                                                             }}</small>
@@ -201,7 +201,7 @@ export default class ServiceIndex extends Vue {
                                                 <div class="col-md-12">
 
                                                     <div class="list-group mb-0">
-                                                        <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                        <div class="list-group-item" style="background-color: #f8dae2;">
                                                             <b>{{ category.categoryName }}</b>
                                                             <small v-if="category.description1"><br>{{ category.description1
                                                             }}</small>

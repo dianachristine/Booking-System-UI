@@ -52,7 +52,7 @@ export default class BookingServices extends Vue {
                                             <div class="col-md-12">
 
                                                 <div class="list-group mb-0">
-                                                    <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                    <div class="list-group-item" style="background-color: #f8dae2;">
                                                         <b>{{ category.categoryName }}</b>
                                                         <small v-if="category.description1"><br>{{ category.description1
                                                         }}</small>
@@ -78,7 +78,7 @@ export default class BookingServices extends Vue {
                                             <div class="col-md-12">
 
                                                 <div class="list-group mb-0">
-                                                    <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                    <div class="list-group-item" style="background-color: #f8dae2;">
                                                         <b>{{ category.categoryName }}</b>
                                                         <small v-if="category.description1"><br>{{ category.description1
                                                         }}</small>
@@ -104,7 +104,7 @@ export default class BookingServices extends Vue {
                                             <div class="col-md-12">
 
                                                 <div class="list-group mb-0">
-                                                    <div class="list-group-item" style="background-color: #f8c6d3;">
+                                                    <div class="list-group-item" style="background-color: #f8dae2;">
                                                         <b>{{ category.categoryName }}</b>
                                                         <small v-if="category.description1"><br>{{ category.description1
                                                         }}</small>

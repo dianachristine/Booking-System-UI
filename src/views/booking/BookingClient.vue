@@ -228,12 +228,12 @@ export default class BookingClient extends Vue {
 
 <style scoped>
 .pink-checkbox:checked {
-    background-color: #f8c6d3 !important;
-    border-color: #f8c6d3 !important;
+    background-color: #f8dae2 !important;
+    border-color: #f8dae2 !important;
 }
 
 .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem #f8c6d3 !important;
+    box-shadow: 0 0 0 0.1rem #f8dae2 !important;
 }
 
 .form-group {

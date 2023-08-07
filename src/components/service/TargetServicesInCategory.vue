@@ -26,7 +26,7 @@ export default class TargetServicesInCategory extends Vue {
         <div class="col-md-12">
 
             <div class="list-group mb-0">
-                <div class="list-group-item" style="background-color: #f8c6d3;">{{ category }}</div>
+                <div class="list-group-item" style="background-color: #f8dae2;">{{ category }}</div>
 
                 <div class="list-group-item" v-for="service of services.filter(service =>
                     service.categoryName === category &&
