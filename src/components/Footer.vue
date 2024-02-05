@@ -48,7 +48,7 @@
 
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2023
+        © 2024
         <a class="text-reset fw-bold" href="https://ee.linkedin.com/in/diana-christine-tarro-55855b196">DCT</a>
     </div>
     <!-- Copyright -->

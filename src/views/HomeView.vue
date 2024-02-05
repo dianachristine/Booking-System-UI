@@ -18,9 +18,9 @@
       width: 100%;
       " >
         <div class="d-flex justify-content-center align-items-center h-100">
-            <div class="text-white">
+            <!--<div class="text-white">
               <RouterLink to="/broneering/teenused" class="btn btn-outline-light btn-lg" role="button" >Broneeri aeg</RouterLink>            
-            </div>
+            </div>-->
         </div>
       </div> 
   </div>
