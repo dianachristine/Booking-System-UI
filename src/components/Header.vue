@@ -74,8 +74,8 @@ export default class Header extends Vue {
                         <template v-if="identityStore.$state.response == null">
                           <!--  <li class="nav-item">
                                 <RouterLink to="/registreeri" class="nav-link" active-class="active">Registreeri
-                                </RouterLink> -->
-                            </li>
+                                </RouterLink> 
+                            </li> -->
                             <li class="nav-item">
                                 <RouterLink to="/login" class="nav-link" active-class="active">Logi sisse</RouterLink>
                             </li>
