@@ -25,7 +25,8 @@ export default class ServiceIndex extends Vue {
     servicesStore = useServicesStore();
     ServiceService = new ServiceService();
 
-    this.servicesStore.$state.services = [
+    async mounted(): Promise<void> {
+        this.servicesStore.$state.services = [
       {
         serviceName: "Käeküünte geellakkimine oma küünele",
         description: null,
@@ -1317,6 +1318,7 @@ export default class ServiceIndex extends Vue {
         id: "aacc8a88-fed6-4c1d-8a96-f76a2c37e749"
       }
     ];
+    }
 }
 </script>
 
